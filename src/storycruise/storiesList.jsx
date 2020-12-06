@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
-import * as buttonStories from '../components/Button.stories';
-import * as inputStories from '../components/forms/Input.stories';
+
+import getStories from './getStories';
 
 function argsReducer(state, action) {
   switch (action.type) {
@@ -99,7 +99,7 @@ function transformStory(storyExport) {
 }
 
 export function getRoutes() {
-  const stories = [buttonStories, inputStories];
+  const stories = getStories();
   const routes = stories.map(transformStory);
 
   return routes;

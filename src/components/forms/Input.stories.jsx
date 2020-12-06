@@ -19,6 +19,7 @@ export function KnobStory(args) {
 
 KnobStory.args = {
   className: 'extra-class',
+  placeholder: 'Gimme your password',
 };
 
 
