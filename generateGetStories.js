@@ -1,14 +1,11 @@
 const path = require('path');
-const fs = require('fs').promises;
 const glob = require('glob');
-
-const getStoriesFilePath = path.join(__dirname, 'src', 'storycruise', 'getStories.js');
 
 function getTemplate(importString, arrString) {
   return `
 ${importString}
 
-export default function getStories() {
+export function getStories() {
   const stories = [${arrString}];
 
   return stories;
@@ -16,22 +13,31 @@ export default function getStories() {
   `;
 }
 
-const options = {
-  cwd: path.join(process.cwd(), 'src'),
-};
+module.exports = function generateGetStories() {
+  const options = {
+    cwd: path.join(process.cwd(), 'src'),
+  };
 
-glob('**/*.stories.jsx', options, async function (er, files) {
-  const importStatements = [];
-  const arrParts = [];
-  files.forEach((filePath, index) => {
-    const correctPath = path.join('../', filePath);
-    const storyName = `story${index}`;
-    const importLine = `import * as ${storyName} from '${correctPath}';`;
-    importStatements.push(importLine);
-    arrParts.push(storyName);
-  });
-  const importString = importStatements.join('\n');
-  const arrString = arrParts.join(', ');
-  const code = getTemplate(importString, arrString).trim();
-  await fs.writeFile(getStoriesFilePath, code);
-});
+  return new Promise((resolve, reject) => {
+    glob('**/*.stories.jsx', options, async function (err, files) {
+      if (err) {
+        reject(err);
+      }
+      const importStatements = [];
+      const arrParts = [];
+      files.forEach((filePath, index) => {
+        const correctPath = path.join('../', filePath);
+        const storyName = `story${index}`;
+        const importLine = `import * as ${storyName} from '${correctPath}';`;
+        importStatements.push(importLine);
+        arrParts.push(storyName);
+      });
+      const importString = importStatements.join('\n');
+      const arrString = arrParts.join(', ');
+      const code = getTemplate(importString, arrString).trim();
+
+      resolve(code);
+    });
+  })
+
+}

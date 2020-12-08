@@ -4,7 +4,11 @@ module.exports = {
     public: '/',
     src: '/_dist_',
   },
-  plugins: ['@snowpack/plugin-react-refresh', '@snowpack/plugin-dotenv'],
+  plugins: [
+    ['./storycruise-plugin.js'],
+    '@snowpack/plugin-react-refresh',
+    '@snowpack/plugin-dotenv',
+  ],
   install: [
     /* ... */
   ],
@@ -13,6 +17,8 @@ module.exports = {
   },
   devOptions: {
     port: 8082,
+    open: 'none',
+    output: 'stream',
   },
   buildOptions: {
     /* ... */

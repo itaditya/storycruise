@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import getStories from './getStories';
+import { getStories } from './getStories'; // virtual file
 
 function argsReducer(state, action) {
   switch (action.type) {
