@@ -12,7 +12,7 @@ module.exports = {
     /* ... */
   },
   devOptions: {
-    /* ... */
+    port: 8082,
   },
   buildOptions: {
     /* ... */
