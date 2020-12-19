@@ -7,7 +7,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.custom-btn {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid rebeccapurple;
+  color: rebeccapurple;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: all 0.2s ease-in;
+}
+
 .custom-btn.purple {
   background-color: rebeccapurple;
   color: #ffffff;
+}
+
+.custom-btn.size-md {
+  font-size: 18px;
+  padding: 5px 20px;
+}
+
+.custom-btn.size-lg {
+  font-size: 24px;
+  padding: 10px 30px;
+}
+
+.custom-btn.size-md.variant-rounded {
+  border-radius: 20px;
+}
+
+.custom-btn.size-lg.variant-rounded {
+  border-radius: 40px;
 }

@@ -11,11 +11,13 @@ function transformStory(storyExport) {
   const stories = storyKeys.map((name) => {
     const Component = storyExport[name];
     const args = Component.args || {};
+    const argTypes = Component.argTypes || {};
 
     return {
       name,
       Component,
       args,
+      argTypes,
     };
   });
 

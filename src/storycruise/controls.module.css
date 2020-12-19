@@ -1,0 +1,15 @@
+.textField {
+  font-size: 14px;
+  padding: 3px 8px;
+}
+
+.radioWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.radioField {
+  margin: 0;
+  margin-right: 5px;
+}

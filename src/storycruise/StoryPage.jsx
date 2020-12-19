@@ -1,6 +1,51 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useMemo } from 'react';
+
+import { Control } from './Controls';
 
 import styles from './styles.module.css';
+
+function convertArgToArgType([name, initialValue]) {
+  return {
+    name,
+    type: { name: 'string', required: true },
+    initialValue,
+    defaultValue: undefined,
+    description: `${name} description`,
+    control: {
+      type: 'text',
+    },
+  };
+}
+
+function normalizeArgType([name, data]) {
+  return {
+    name,
+    type: { name: 'string', required: true },
+    initialValue: undefined,
+    defaultValue: undefined,
+    description: `${name} description`,
+    control: {
+      type: 'text',
+    },
+    ...data,
+  };
+}
+
+function getStoryKnobs(story) {
+  const knobs = {};
+
+  Object.entries(story.args).forEach(([name, initialValue]) => {
+    const argType = convertArgToArgType([name, initialValue]);
+    knobs[name] = argType;
+  });
+
+  Object.entries(story.argTypes).forEach(([name, data]) => {
+    const argType = normalizeArgType([name, data]);
+    knobs[name] = argType;
+  });
+
+  return knobs;
+}
 
 function argsReducer(state, action) {
   switch (action.type) {
@@ -14,8 +59,21 @@ function argsReducer(state, action) {
   }
 }
 
+function getInitialState(knobs) {
+  const initialState = {};
+
+  Object.keys(knobs).forEach((key) => {
+    initialState[key] = knobs[key].initialValue;
+  });
+
+  return initialState;
+}
+
 function ControlsStory({ story }) {
-  const [state, dispatch] = useReducer(argsReducer, story.args);
+  const knobs = useMemo(() => {
+    return getStoryKnobs(story);
+  }, []);
+  const [state, dispatch] = useReducer(argsReducer, knobs, getInitialState);
 
   return (
     <div className={styles.controlStoryWrapper}>
@@ -24,34 +82,33 @@ function ControlsStory({ story }) {
       </div>
       <div>
         <h3>Knobs</h3>
-        <div className={styles.tableHeading}>
-          <strong>Name</strong>
-          <strong>Description</strong>
-          <strong>Default</strong>
-          <strong>Control</strong>
-        </div>
         <div className={styles.propsTable}>
-          {Object.keys(state).map((argKey) => {
-            return (
-              <div className={styles.tableRow} key={argKey}>
-                <span>{argKey}</span>
-                <span>{argKey}</span>
-                <span>{argKey}</span>
-                <input
-                  type="text"
-                  className="value-knob"
-                  value={state[argKey]}
-                  onChange={(event) => {
-                    dispatch({
-                      type: 'change',
-                      arg: argKey,
-                      value: event.target.value,
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
+          <div className={styles.tableHeading}>
+            <strong className={styles.tableCell}>Name</strong>
+            <strong className={`${styles.tableCell} ${styles.propDescription}`}>Description</strong>
+            <strong className={styles.tableCell}>Default</strong>
+            <strong className={`${styles.tableCell} ${styles.propControl}`}>Control</strong>
+          </div>
+          <div className={styles.tableBody}>
+            {Object.keys(knobs).map((argKey) => {
+              const knob = knobs[argKey];
+              return (
+                <div className={styles.tableRow} key={argKey}>
+                  <span className={styles.tableCell}>{knob.name}</span>
+                  <span className={`${styles.tableCell} ${styles.propDescription}`}>{knob.description}</span>
+                  <span className={styles.tableCell}>{knob.defaultValue}</span>
+                  <div className={`${styles.tableCell} ${styles.propControl}`}>
+                    <Control
+                      argKey={argKey}
+                      control={knob.control}
+                      value={state[argKey]}
+                      dispatch={dispatch}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
