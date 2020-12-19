@@ -11,9 +11,7 @@ export default storyConfig;
 
 export function KnobStory(args) {
   return (
-    <div>
-      <Input type="text" name="username" {...args} />
-    </div>
+    <Input type="text" name="username" {...args} />
   );
 }
 
@@ -25,8 +23,6 @@ KnobStory.args = {
 
 export function SecondStory() {
   return (
-    <div>
-      <Input type="number" name="phoneNumber" />
-    </div>
+    <Input type="number" name="phoneNumber" />
   );
 }
