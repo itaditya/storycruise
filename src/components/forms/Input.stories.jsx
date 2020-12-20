@@ -20,6 +20,12 @@ KnobStory.args = {
   placeholder: 'Gimme your password',
 };
 
+KnobStory.argTypes = {
+  onChange: {
+    description: 'Attach change event handler',
+    action: 'input changed',
+  },
+};
 
 export function SecondStory() {
   return (

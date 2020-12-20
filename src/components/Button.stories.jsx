@@ -38,6 +38,10 @@ KnobStory.argTypes = {
       options: ['md', 'lg'],
     },
   },
+  onClick: {
+    description: 'Attach click event handler',
+    action: 'clicked',
+  },
 };
 
 export function SecondaryButtonStory() {

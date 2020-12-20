@@ -59,22 +59,49 @@ function getInitialState(knobs) {
   const initialState = {};
 
   Object.keys(knobs).forEach((key) => {
-    initialState[key] = knobs[key].initialValue;
+    const knob = knobs[key];
+
+    if (!knob.action) {
+      initialState[key] = knob.initialValue;
+    }
   });
 
   return initialState;
+}
+
+function getActions(knobs) {
+  const logger = (text) => () => {
+    console.log(`[Action]: ${text}`);
+  }
+
+  const handlers = {};
+
+  Object.keys(knobs).forEach((key) => {
+    const { action } = knobs[key];
+
+    if (action) {
+      handlers[key] = logger(action);
+    }
+  });
+
+  return handlers;
 }
 
 function ControlsStory({ story }) {
   const knobs = useMemo(() => {
     return getStoryKnobs(story);
   }, []);
+
+  const actions = useMemo(() => {
+    return getActions(knobs);
+  }, []);
+
   const [state, dispatch] = useReducer(argsReducer, knobs, getInitialState);
 
   return (
     <div className={styles.controlStoryWrapper}>
       <div className={styles.componentWrapper}>
-        <story.Component {...state} />
+        <story.Component {...state} {...actions} />
       </div>
       <div>
         <h3>Knobs</h3>
@@ -88,18 +115,27 @@ function ControlsStory({ story }) {
           <div className={styles.tableBody}>
             {Object.keys(knobs).map((argKey) => {
               const knob = knobs[argKey];
+
               return (
                 <div className={styles.tableRow} key={argKey}>
                   <strong className={styles.tableCell}>{knob.name}</strong>
                   <span className={`${styles.tableCell} ${styles.propDescription}`}>{knob.description}</span>
                   <span className={styles.tableCell}>{knob.defaultValue}</span>
                   <div className={`${styles.tableCell} ${styles.propControl}`}>
-                    <Control
-                      argKey={argKey}
-                      control={knob.control}
-                      value={state[argKey]}
-                      dispatch={dispatch}
-                    />
+                    {
+                      knob.action ? (
+                        <span>
+                          Action- {knob.action}
+                        </span>
+                      ) : (
+                        <Control
+                          argKey={argKey}
+                          control={knob.control}
+                          value={state[argKey]}
+                          dispatch={dispatch}
+                        />
+                      )
+                    }
                   </div>
                 </div>
               );
