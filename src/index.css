@@ -17,6 +17,14 @@ body {
   transition: all 0.2s ease-in;
 }
 
+.custom-btn:hover {
+  background-color: rgba(102, 51, 153, 0.1);
+}
+
+.custom-btn:active {
+  background-color: rgba(102, 51, 153, 0.8);
+}
+
 .custom-btn.purple {
   background-color: rebeccapurple;
   color: #ffffff;
