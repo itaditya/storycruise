@@ -90,7 +90,7 @@ function ControlsStory({ story }) {
               const knob = knobs[argKey];
               return (
                 <div className={styles.tableRow} key={argKey}>
-                  <span className={styles.tableCell}>{knob.name}</span>
+                  <strong className={styles.tableCell}>{knob.name}</strong>
                   <span className={`${styles.tableCell} ${styles.propDescription}`}>{knob.description}</span>
                   <span className={styles.tableCell}>{knob.defaultValue}</span>
                   <div className={`${styles.tableCell} ${styles.propControl}`}>
@@ -122,10 +122,11 @@ function NormalStory({ story }) {
   );
 }
 
-function StoryPage({ name, stories }) {
+function StoryPage({ name, description, stories }) {
   return (
     <div>
       <h1>{name}</h1>
+      <p>{description}</p>
       {stories.map((story) => {
         const Component =
           story.name === 'KnobStory' ? ControlsStory : NormalStory;

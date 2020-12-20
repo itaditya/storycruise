@@ -5,6 +5,7 @@ import CompanyLogo from './CompanyLogo';
 const storyConfig = {
   name: 'CompanyLogo',
   path: 'company-logo',
+  description: 'Show logo of company with company name',
 };
 
 export default storyConfig;

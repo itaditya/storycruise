@@ -5,6 +5,7 @@ import Button from './Button';
 const storyConfig = {
   name: 'Button',
   path: 'button',
+  description: 'Primary UI element for click interaction',
 };
 
 export default storyConfig;

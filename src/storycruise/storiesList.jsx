@@ -21,10 +21,17 @@ function transformStory(storyExport) {
     };
   });
 
+  const storyPageProps = {
+    key: config.name,
+    name: config.name,
+    description: config.description,
+    stories,
+  }
+
   const route = {
     path: config.path,
     name: config.name,
-    element: <StoryPage stories={stories} name={config.name} key={config.name} />,
+    element: <StoryPage {...storyPageProps} />,
   };
 
   return route;
