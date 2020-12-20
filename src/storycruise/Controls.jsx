@@ -23,7 +23,7 @@ export function ControlInlineRadio({ argKey, control, value, dispatch }) {
   const { options } = control;
   return (
     <div className={styles.radioWrapper}>
-      {options.map(option => (
+      {options.map((option) => (
         <label key={option}>
           <input
             type="radio"
@@ -40,15 +40,39 @@ export function ControlInlineRadio({ argKey, control, value, dispatch }) {
           />
           {option}
         </label>
-
       ))}
     </div>
+  );
+}
+
+export function ControlSelect({ argKey, control, value, dispatch }) {
+  const { options } = control;
+
+  return (
+    <select
+      className={styles.selectMenu}
+      value={value}
+      onChange={(event) => {
+        dispatch({
+          type: 'change',
+          arg: argKey,
+          value: event.target.value,
+        });
+      }}
+    >
+      {options.map((option) => (
+        <option key={option} value={option} className={styles.selectOption}>
+          {option}
+        </option>
+      ))}
+    </select>
   );
 }
 
 const controlsMapping = {
   text: ControlText,
   'inline-radio': ControlInlineRadio,
+  select: ControlSelect,
 };
 
 export function Control(props) {
@@ -56,5 +80,5 @@ export function Control(props) {
 
   const Component = controlsMapping[control.type];
 
-  return <Component {...props} />
+  return <Component {...props} />;
 }

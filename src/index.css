@@ -39,3 +39,13 @@ body {
 .custom-btn.size-lg.variant-rounded {
   border-radius: 40px;
 }
+
+.custom-company-logo.size-md {
+  width: 60px;
+  height: 60px;
+}
+
+.custom-company-logo.size-lg {
+  width: 100px;
+  height: 100px;
+}

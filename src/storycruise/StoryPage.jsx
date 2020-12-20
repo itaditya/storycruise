@@ -4,19 +4,6 @@ import { Control } from './Controls';
 
 import styles from './styles.module.css';
 
-function convertArgToArgType([name, initialValue]) {
-  return {
-    name,
-    type: { name: 'string', required: true },
-    initialValue,
-    defaultValue: undefined,
-    description: `${name} description`,
-    control: {
-      type: 'text',
-    },
-  };
-}
-
 function normalizeArgType([name, data]) {
   return {
     name,
@@ -34,12 +21,21 @@ function normalizeArgType([name, data]) {
 function getStoryKnobs(story) {
   const knobs = {};
 
+  const argTypes = {
+    ...story.argTypes,
+  };
+
   Object.entries(story.args).forEach(([name, initialValue]) => {
-    const argType = convertArgToArgType([name, initialValue]);
-    knobs[name] = argType;
+    const argType =  {
+      name,
+      initialValue,
+    };
+
+    argTypes[name] = argTypes[name] || {};
+    Object.assign(argTypes[name], argType);
   });
 
-  Object.entries(story.argTypes).forEach(([name, data]) => {
+  Object.entries(argTypes).forEach(([name, data]) => {
     const argType = normalizeArgType([name, data]);
     knobs[name] = argType;
   });

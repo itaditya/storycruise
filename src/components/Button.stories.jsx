@@ -24,12 +24,14 @@ KnobStory.args = {
 
 KnobStory.argTypes = {
   variant: {
+    description: 'Square button or rounded button',
     control: {
       type: 'inline-radio',
       options: ['default', 'rounded'],
     },
   },
   size: {
+    description: 'Size of the button',
     control: {
       type: 'inline-radio',
       options: ['md', 'lg'],
@@ -37,10 +39,10 @@ KnobStory.argTypes = {
   },
 };
 
-export function SecondStory() {
+export function SecondaryButtonStory() {
   return (
     <div>
-      <Button>Another button</Button>
+      <Button variant="rounded" size="lg">Another button</Button>
     </div>
   );
 }

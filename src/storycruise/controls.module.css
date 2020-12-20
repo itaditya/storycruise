@@ -13,3 +13,13 @@
   margin: 0;
   margin-right: 5px;
 }
+
+.selectMenu {
+  font-size: 14px;
+  width: 100%;
+  padding: 5px;
+}
+
+.selectOption {
+  font-size: 14px;
+}
