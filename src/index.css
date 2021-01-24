@@ -57,3 +57,37 @@ body {
   width: 100px;
   height: 100px;
 }
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.nav-spacer {
+  flex: 1;
+}
+
+.top-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-item {
+  font-size: 1.25rem;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

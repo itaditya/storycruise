@@ -1,13 +1,22 @@
-import React from 'react';
-import { NavLink, useRoutes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useRoutes, useNavigate } from 'react-router-dom';
 
 import { getRoutes } from './storiesList';
 
 import styles from './styles.module.css';
 
+const routes = getRoutes();
+
 function Shell() {
-  const routes = getRoutes();
   const element = useRoutes(routes);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!element) {
+      const firstStoryPath = routes[0].path;
+      navigate(`/stories/${firstStoryPath}`);
+    }
+  }, [element]);
 
   return (
     <div className={styles.storycruiseWrapper}>

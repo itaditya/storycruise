@@ -7,7 +7,7 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
+    <App />
     <StoryCruise />
   </React.StrictMode>,
   document.getElementById('root'),
