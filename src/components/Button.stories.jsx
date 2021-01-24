@@ -45,10 +45,23 @@ KnobStory.argTypes = {
   },
 };
 
-export function LargeRoundedButton() {
+function Template(args) {
   return (
     <div>
-      <Button variant="rounded" size="lg">Another button</Button>
+      <Button {...args} />
     </div>
   );
 }
+
+export const LargeRoundedButton = Template.bind({});
+LargeRoundedButton.args = {
+  variant: 'rounded',
+  size: 'lg',
+  children: 'Large Rounded Button',
+};
+
+export const RoundedButton = Template.bind({});
+RoundedButton.args = {
+  variant: 'rounded',
+  children: 'Rounded Button',
+};

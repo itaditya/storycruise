@@ -160,7 +160,7 @@ function NormalStory({ story }) {
     <div>
       <h3>{title}</h3>
       <div className={styles.componentWrapper}>
-        <story.Component />
+        <story.Component {...story.args} />
       </div>
     </div>
   );
