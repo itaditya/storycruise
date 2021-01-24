@@ -1,4 +1,5 @@
 import React, { useReducer, useMemo } from 'react';
+import { sentenceCase } from 'sentence-case';
 
 import { Control } from './Controls';
 
@@ -26,7 +27,7 @@ function getStoryKnobs(story) {
   };
 
   Object.entries(story.args).forEach(([name, initialValue]) => {
-    const argType =  {
+    const argType = {
       name,
       initialValue,
     };
@@ -72,7 +73,7 @@ function getInitialState(knobs) {
 function getActions(knobs) {
   const logger = (text) => () => {
     console.log(`[Action]: ${text}`);
-  }
+  };
 
   const handlers = {};
 
@@ -108,9 +109,13 @@ function ControlsStory({ story }) {
         <div className={styles.propsTable}>
           <div className={styles.tableHeading}>
             <strong className={styles.tableCell}>Name</strong>
-            <strong className={`${styles.tableCell} ${styles.propDescription}`}>Description</strong>
+            <strong className={`${styles.tableCell} ${styles.propDescription}`}>
+              Description
+            </strong>
             <strong className={styles.tableCell}>Default</strong>
-            <strong className={`${styles.tableCell} ${styles.propControl}`}>Control</strong>
+            <strong className={`${styles.tableCell} ${styles.propControl}`}>
+              Control
+            </strong>
           </div>
           <div className={styles.tableBody}>
             {Object.keys(knobs).map((argKey) => {
@@ -119,23 +124,25 @@ function ControlsStory({ story }) {
               return (
                 <div className={styles.tableRow} key={argKey}>
                   <strong className={styles.tableCell}>{knob.name}</strong>
-                  <span className={`${styles.tableCell} ${styles.propDescription}`}>{knob.description}</span>
-                  <span className={styles.tableCell}>{knob.defaultValue || '-'}</span>
+                  <span
+                    className={`${styles.tableCell} ${styles.propDescription}`}
+                  >
+                    {knob.description}
+                  </span>
+                  <span className={styles.tableCell}>
+                    {knob.defaultValue || '-'}
+                  </span>
                   <div className={`${styles.tableCell} ${styles.propControl}`}>
-                    {
-                      knob.action ? (
-                        <span>
-                          Action- {knob.action}
-                        </span>
-                      ) : (
-                        <Control
-                          argKey={argKey}
-                          control={knob.control}
-                          value={state[argKey]}
-                          dispatch={dispatch}
-                        />
-                      )
-                    }
+                    {knob.action ? (
+                      <span>Action- {knob.action}</span>
+                    ) : (
+                      <Control
+                        argKey={argKey}
+                        control={knob.control}
+                        value={state[argKey]}
+                        dispatch={dispatch}
+                      />
+                    )}
                   </div>
                 </div>
               );
@@ -148,9 +155,10 @@ function ControlsStory({ story }) {
 }
 
 function NormalStory({ story }) {
+  const title = sentenceCase(story.name);
   return (
     <div>
-      <h3>{story.name}</h3>
+      <h3>{title}</h3>
       <div className={styles.componentWrapper}>
         <story.Component />
       </div>
