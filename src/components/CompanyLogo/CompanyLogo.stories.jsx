@@ -32,6 +32,7 @@ KnobStory.argTypes = {
   },
   shade: {
     description: 'Color of the logo',
+    defaultValue: '000',
     control: {
       type: 'inline-radio',
       options: ['000', '639', 'f87171'],
@@ -39,6 +40,7 @@ KnobStory.argTypes = {
   },
   size: {
     description: 'Size of the logo',
+    defaultValue: 'md',
     control: {
       type: 'inline-radio',
       options: ['md', 'lg'],

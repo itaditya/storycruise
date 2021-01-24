@@ -27,8 +27,8 @@ KnobStory.argTypes = {
   },
 };
 
-export function SecondStory() {
+export function PhoneNumberInput() {
   return (
-    <Input type="number" name="phoneNumber" />
+    <Input type="number" name="phoneNumber" placeholder="(+91) 1122334455" />
   );
 }

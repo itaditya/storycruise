@@ -58,6 +58,19 @@ body {
   height: 100px;
 }
 
+.custom-input {
+  font-size: 18px;
+  color: #555;
+  border: none;
+  border-bottom: 2px solid #555;
+  padding: 5px;
+}
+
+.custom-input:focus {
+  outline: 2px solid #333;
+  outline-offset: 4px;
+}
+
 .home {
   min-height: 100vh;
   display: flex;

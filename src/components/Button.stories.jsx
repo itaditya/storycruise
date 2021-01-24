@@ -19,14 +19,13 @@ export function KnobStory(args) {
 }
 
 KnobStory.args = {
-  variant: 'default',
-  size: 'md',
   children: 'Submit',
 };
 
 KnobStory.argTypes = {
   variant: {
     description: 'Square button or rounded button',
+    defaultValue: 'default',
     control: {
       type: 'inline-radio',
       options: ['default', 'rounded'],
@@ -34,6 +33,7 @@ KnobStory.argTypes = {
   },
   size: {
     description: 'Size of the button',
+    defaultValue: 'md',
     control: {
       type: 'inline-radio',
       options: ['md', 'lg'],
@@ -45,7 +45,7 @@ KnobStory.argTypes = {
   },
 };
 
-export function SecondaryButtonStory() {
+export function LargeRoundedButton() {
   return (
     <div>
       <Button variant="rounded" size="lg">Another button</Button>

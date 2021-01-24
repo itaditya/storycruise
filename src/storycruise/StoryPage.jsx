@@ -8,8 +8,8 @@ function normalizeArgType([name, data]) {
   return {
     name,
     type: { name: 'string', required: true },
-    initialValue: undefined,
     defaultValue: undefined,
+    initialValue: data.defaultValue,
     description: `${name} description`,
     control: {
       type: 'text',
@@ -120,7 +120,7 @@ function ControlsStory({ story }) {
                 <div className={styles.tableRow} key={argKey}>
                   <strong className={styles.tableCell}>{knob.name}</strong>
                   <span className={`${styles.tableCell} ${styles.propDescription}`}>{knob.description}</span>
-                  <span className={styles.tableCell}>{knob.defaultValue}</span>
+                  <span className={styles.tableCell}>{knob.defaultValue || '-'}</span>
                   <div className={`${styles.tableCell} ${styles.propControl}`}>
                     {
                       knob.action ? (
