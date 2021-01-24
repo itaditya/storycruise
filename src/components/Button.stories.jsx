@@ -19,7 +19,8 @@ export function KnobStory(args) {
 }
 
 KnobStory.args = {
-  className: 'extra-btn-class',
+  variant: 'default',
+  size: 'md',
   children: 'Submit',
 };
 
